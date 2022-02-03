@@ -2,31 +2,13 @@
 
 class Media{
     public :
-        Media () ;
+        Media(std::string auteur, std::string titre) ;
+        virtual ~Media(){} ;
+        friend std::ostream& operator<<(std::ostream& , Media&);
+
+        std::string auteur;
+        std::string titre ;
+        std::string type_media ;
+    private :
+        std::ostream& print() ;
 };
-
-
-class DVD : public Media{
-    public :
-        DVD () ;
-} ;
-
-class Livre : public Media {
-    public : 
-        Livre () ;
-} ;
-
-class VHS : public Media {
-    public : 
-        VHS() ;
-} ;
-
-class Revue : public Media {
-    public : 
-        Revue() ;
-} ;
-
-class CD : public Media {
-    public :
-        CD() ;
-} ;
