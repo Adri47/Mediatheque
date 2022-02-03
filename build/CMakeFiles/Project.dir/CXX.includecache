@@ -9,14 +9,18 @@
 ../Inc/main.h
 
 ../Inc/media.h
+iostream
+-
 
-/home/benjamin/Bureau/ENSEIRB/S10/EN317 C++/Projet/Src/media.cpp
+/home/adrien/Documents/GitHub/Mediatheque/Src/main.cpp
+
+/home/adrien/Documents/GitHub/Mediatheque/Src/media.cpp
 iostream
 -
 string
 -
 main.h
-/home/benjamin/Bureau/ENSEIRB/S10/EN317 C++/Projet/Src/main.h
+/home/adrien/Documents/GitHub/Mediatheque/Src/main.h
 media.h
-/home/benjamin/Bureau/ENSEIRB/S10/EN317 C++/Projet/Src/media.h
+/home/adrien/Documents/GitHub/Mediatheque/Src/media.h
 

@@ -1,1 +1,1 @@
-/usr/bin/c++ -rdynamic CMakeFiles/Project.dir/Src/main.cpp.o CMakeFiles/Project.dir/Src/media.cpp.o -o Project 
+/usr/bin/c++    -rdynamic CMakeFiles/Project.dir/Src/main.cpp.o CMakeFiles/Project.dir/Src/media.cpp.o  -o Project 
