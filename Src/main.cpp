@@ -51,6 +51,8 @@ int main ()
             //cout << *t ;
         } 
     }
+
+    ecriture_fichier("../Src/test.txt", "C'est réussi !");
     while (commande != "BYE")
     {
         recup_string("Entrez votre commande :", " " , &commande, &option);

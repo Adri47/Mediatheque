@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "commande.h"
+#include "media.h"
 
 using namespace std;
 
@@ -27,6 +28,19 @@ void lecture_fichier(string nom_fichier)
         cout << STRING << endl;
     }
     infile.close();
+}
+
+void ecriture_fichier(string nom_fichier, string texte)
+{
+    string STRING;
+    ofstream outfile(nom_fichier, ios::app);
+    
+    if (outfile)
+    {
+        outfile << texte << endl;
+    }
+    else 
+        cout << "Erreur d'ouverture fichier pour ecriture" << endl;
 }
 
 void recup_string(string chaine_ecran, string separateur, string *premier_mot, string *deuxieme_mot)
