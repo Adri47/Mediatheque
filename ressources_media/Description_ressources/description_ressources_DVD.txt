@@ -1,0 +1,8 @@
+Type de ressource DVD :
+--> Spécifier les caractéristiques du DVD :
+	1) Réalisateur
+	2) Titre
+	3) Maison de production
+	4) Duree
+	5) Nombre de piste
+Exemple : $ 

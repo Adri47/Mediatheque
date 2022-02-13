@@ -8,6 +8,7 @@
 
 
 using namespace std;
+vector<Media*> database ; 
 
 int main ()
 {
@@ -15,12 +16,12 @@ int main ()
     string option;
     //lecture_fichier("../Src/test.txt");
 
-    vector<Media*> database ; 
-    VHS History("Ben","History of SEE","SEE",90) ;
-    DVD HP("JK.Rowling","Harry Potter à l'école des sorciers","Mappa",120,12) ;
+    //VHS History("Ben","History of SEE","SEE",90) ;
+    //DVD HP("JK.Rowling","Harry Potter à l'école des sorciers","Mappa",120,12) ;
+    Livre SA("J.R.R.Tolkien","The Lord of the ring","Marvel",1940,452) ;
 
-    database.push_back(&History) ;
-    database.push_back(&HP) ;
+    //database.push_back(&History) ;
+    //database.push_back(&HP) ;
 
     for (int i = 0; i < database.size(); i++) {
         
@@ -51,20 +52,15 @@ int main ()
             //cout << *t ;
         } 
     }
-
-    ecriture_fichier("../Src/test.txt", "C'est réussi !");
+    string donnee;
+    //ecriture_fichier("../Src/test.txt", "C'est réussi !");
     while (commande != "BYE")
     {
-        recup_string("Entrez votre commande :", " " , &commande, &option);
-        //cout << "COMMANDE : " << commande << endl;
-        //cout << "OPTION : " << option << endl;
-
-        if (commande == "ADD")
-        {
-            commande_ADD(option);
-        }
+        selection_commande(&commande);
+        selection_option(&commande, &option, database);
     }
     cout << "Vous avez quitté la médiathèque :'(  Au revoir !" << endl;
-
+    cin.clear(); //remet l'état du flux dans un état valide (resolution pb de terminal)
+    
     return EXIT_SUCCESS;
 }

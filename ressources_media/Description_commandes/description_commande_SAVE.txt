@@ -1,0 +1,3 @@
+OPTION commande SAVE :
+--> Spécifier le chemin du fichier dans le lequel les ressources seront sauvegarder :
+	Exemeple : "List_Save.txt"

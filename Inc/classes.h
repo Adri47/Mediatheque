@@ -20,32 +20,33 @@ class DVD : public VHS{
         int nbpistes ;
 } ;
 
+class CD : public VHS {
+    public :
+        CD(std::string auteur ,std::string titre, std::string maison_prod, int duree , int nb_pistes) ;
+        friend std::ostream& operator<<(std::ostream& , CD&);
+
+        std::string type = "CD"; 
+        int nbpistes ; 
+} ;
+
 class Livre : public Media {
     public : 
-        Livre () ;
+        Livre (std::string auteur ,std::string titre, std::string collection,int annee, int pages) ;
+        friend std::ostream& operator<<(std::ostream& , Livre&);
 
-        std::string maison_edition ;
+        std::string collection ;
         std::string type = "Livre" ; 
-        int annee ;
-        int page ; 
+        int parrution ;
+        int nb_page ; 
 } ;
 
 
 class Revue : public Livre {
     public : 
-        Revue() ;
+        Revue(std::string auteur ,std::string titre, std::string collection,std::string editeur,int nb_articles, int annee, int pages) ;
+        friend std::ostream& operator<<(std::ostream& , Revue&);
 
         std::string editeur ;
         std::string type = "Revue" ; 
         int nb_articles ;
-} ;
-
-class CD : public Media {
-    public :
-        CD() ;
-
-        std::string maison_prod;
-        std::string type = "CD"; 
-        int annee ;
-        int nb_pistes ; 
 } ;

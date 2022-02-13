@@ -1,0 +1,8 @@
+Type de ressource Livre :
+--> Spécifier les caractéristiques du livre :
+	1) Auteur
+	2) Titre
+	3) Collection
+	4) Date de paruption
+	5) Nombre de pages
+Exemple : $JK_Rowling Harry_Potter Bloomsbury 1997 223

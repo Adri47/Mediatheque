@@ -1,0 +1,6 @@
+OPTION commande ADD :
+--> Spécifier le type de ressource à ajouter :
+	- Livre
+	- DVD
+	- VHS
+	- Revue

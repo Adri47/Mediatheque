@@ -1,5 +1,8 @@
 #include <iostream>
 
+#ifndef MEDIA_H
+#define MEDIA_H
+
 class Media{
     public :
         Media(std::string auteur, std::string titre) ;
@@ -12,3 +15,4 @@ class Media{
     private :
         std::ostream& print() ;
 };
+#endif
