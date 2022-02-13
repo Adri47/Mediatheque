@@ -1,6 +1,9 @@
 #include <iostream>
 #include "media.h"
 
+#ifndef CLASSES_H
+#define CLASSES_H
+
 class VHS : public Media{
     public : 
         VHS(std::string auteur ,std::string titre, std::string maison_prod, int duree ) ;
@@ -50,3 +53,5 @@ class Revue : public Livre {
         std::string type = "Revue" ; 
         int nb_articles ;
 } ;
+
+#endif

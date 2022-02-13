@@ -72,7 +72,7 @@ void selection_commande(string *commande)
     cin >> *commande;
 }
 
-void selection_option(string *commande, string *option, vector<Media*> database)
+void selection_option(string *commande, string *option, Mediatheque* database)
 {
 
     if (*commande == "ADD")
@@ -124,7 +124,7 @@ void selection_option(string *commande, string *option, vector<Media*> database)
     }
 }
 
-void commande_ADD(string *type, vector<Media*> database)
+void commande_ADD(string *type, Mediatheque* database)
 {
     string donnee;
     string donnee_livre[5] = {};
@@ -140,13 +140,14 @@ void commande_ADD(string *type, vector<Media*> database)
            
         //cout << "1 :" << donnee_livre[0] << "2 :" << donnee_livre[1] << "3 :" << donnee_livre[2] << "4 :" << donnee_livre[3] << "5 :" << donnee_livre[4] << endl;
         Livre new_livre(donnee_livre[0], donnee_livre[1], donnee_livre[2], stoi(donnee_livre[3]), stoi(donnee_livre[4])) ;
-        database.push_back(&new_livre);
-        cout << *database[0] << endl;
+        //database.push_back(&new_livre);
+        database->ajouter_media(&new_livre);
+        //cout << *database << endl;
     }
 
     if (*type == "DVD")
     {
-        lecture_fichier("../ressources_media/Description_ressources/description_ressources_DVD.txt");
+        lecture_fichier("../ressources_media/Descriptiorn_ressources/description_ressources_DVD.txt");
         lecture_clavier("", &donnee);
 
         recup_donnee_dvd(donnee, donnee_livre);

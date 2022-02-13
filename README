@@ -1,0 +1,7 @@
+Démarches pour lancer le projet :
+
+1) Créer un dossier build à la racine du projet
+2) Executer la commande cmake .. dans le dossier build
+3) Compiler le projet avec la commande make all
+4) Executer le code avec la commande ./Project 
+5) Remplir les options proposé par le terminal

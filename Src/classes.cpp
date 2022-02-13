@@ -52,7 +52,8 @@ std::ostream& operator<<(std::ostream& out , VHS& s) {
     out << "Titre : " << s.titre << std::endl ; 
     out << "Auteur : " << s.auteur << std::endl ; 
     out << "Maison de production : " << s.maison_prod << std::endl ; 
-    out << "Durée : " << s.duree << " min" <<std::endl ; 
+    out << "Durée : " << s.duree << " min" << std::endl ; 
+    out << "Etiquette : " << s.ID << std::endl ;  
     out << "------------------" << std::endl;
 
     return out ;
@@ -65,6 +66,7 @@ std::ostream& operator<<(std::ostream& out , DVD& s) {
     out << "Maison de production : " << s.maison_prod << std::endl ; 
     out << "Durée : " << s.duree << " min" <<std::endl ; 
     out << "Nombre de pistes : " << s.nbpistes << std::endl;
+    out << "Etiquette : " << s.ID << std::endl ;  
     out << "------------------" << std::endl;
 
     return out ;
@@ -77,6 +79,7 @@ std::ostream& operator<<(std::ostream& out , CD& s) {
     out << "Maison de production : " << s.maison_prod << std::endl ; 
     out << "Durée : " << s.duree << " min" <<std::endl ; 
     out << "Nombre de pistes : " << s.nbpistes << std::endl;
+    out << "Etiquette : " << s.ID << std::endl ;  
     out << "------------------" << std::endl;
 
     return out ;
@@ -89,6 +92,7 @@ std::ostream& operator<<(std::ostream& out , Livre& s) {
     out << "Collection : " << s.collection << std::endl ; 
     out << "Année de parution : " << s.parrution << std::endl ; 
     out << "Nombre de pages : " << s.nb_page <<std::endl ; 
+    out << "Etiquette : " << s.ID << std::endl ;  
     out << "------------------" << std::endl;
 
     return out ;
@@ -103,6 +107,7 @@ std::ostream& operator<<(std::ostream& out , Revue& s) {
     out << "Année de parution : " << s.parrution << std::endl ; 
     out << "Nombre d'articles : " << s.nb_articles << std::endl ; 
     out << "Nombre de pages : " << s.nb_page <<std::endl ; 
+    out << "Etiquette : " << s.ID << std::endl ;  
     out << "------------------" << std::endl;
 
     return out ;
