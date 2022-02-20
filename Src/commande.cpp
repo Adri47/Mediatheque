@@ -82,6 +82,7 @@ void selection_option(string *commande, string *option, Mediatheque* database)
         cout << ">> ";
         cin >> *option;
         commande_ADD(option, database);
+        //cout << database[0] << endl;
         
     }
     else if (*commande == "LOAD")
@@ -139,10 +140,9 @@ void commande_ADD(string *type, Mediatheque* database)
         recup_donnee_livre(donnee, donnee_livre);
            
         //cout << "1 :" << donnee_livre[0] << "2 :" << donnee_livre[1] << "3 :" << donnee_livre[2] << "4 :" << donnee_livre[3] << "5 :" << donnee_livre[4] << endl;
-        Livre new_livre(donnee_livre[0], donnee_livre[1], donnee_livre[2], stoi(donnee_livre[3]), stoi(donnee_livre[4])) ;
-        //database.push_back(&new_livre);
-        database->ajouter_media(&new_livre);
-        //cout << *database << endl;
+        Livre *new_livre = new Livre(donnee_livre[0], donnee_livre[1], donnee_livre[2], stoi(donnee_livre[3]), stoi(donnee_livre[4])) ;
+        //cout << new_livre->auteur << " " << new_livre->titre << " " << new_livre->collection << " "<< new_livre->parrution << " "<< new_livre->nb_page << endl; 
+        database->ajouter_media(new_livre);
     }
 
     if (*type == "DVD")
