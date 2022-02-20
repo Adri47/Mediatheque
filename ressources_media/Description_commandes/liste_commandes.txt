@@ -1,4 +1,4 @@
-
+------------------------------------------------------------------------------
 ADD    : Ajouter d'une ressource
 LOAD   : Charger votre fichier pour remplacer les données actuelles
 SAVE   : Sauvegarder le contenu des resssources dans un fichier texte

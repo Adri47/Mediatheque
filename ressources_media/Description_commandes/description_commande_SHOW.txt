@@ -1,2 +1,3 @@
+------------------------------------------------------------------------------
 OPTION commande SHOW :
 --> Spécifier l'identifiant de la ressource

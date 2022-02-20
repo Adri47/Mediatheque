@@ -1,0 +1,1 @@
+Ne pas supprimer. Dossier contenant les fichiers de sortie de la commande SAVE.

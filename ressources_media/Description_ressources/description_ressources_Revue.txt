@@ -1,0 +1,7 @@
+------------------------------------------------------------------------------
+Type de ressource Revue :
+--> Spécifier les caractéristiques du Revu en suivant la topologie suivante :
+
+	$ Rédacteur en chef;Titre;Maison de production;Edition;Nombre d'article;Année;Nombre de pages
+
+	Exemple : $ Jerome Blanchart;Sciences Et Vie;GM-Editions;12;2022;50

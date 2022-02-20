@@ -4,24 +4,24 @@
 
 
 // VHS
-VHS::VHS(std::string auteur ,std::string titre, std::string maison_prod, int duree ) 
+VHS::VHS(std::string auteur ,std::string titre, std::string maison_prod, int duree, int annee ) 
     : Media(auteur, titre) {
         this->maison_prod = maison_prod ;
         this->duree = duree ;
+        this->annee = annee;
         type_media = type ; 
-
 }
 
 // DVD
-DVD::DVD(std::string auteur ,std::string titre, std::string maison_prod, int duree, int nb_pistes ) 
-    : VHS(auteur,titre, maison_prod, duree) { 
-        nbpistes = nb_pistes ;
+DVD::DVD(std::string auteur ,std::string titre, std::string maison_prod, int duree, int annee ) 
+    : VHS(auteur,titre, maison_prod, duree, annee) { 
+        this->annee = annee ;
         type_media = type ; 
     }
 
 // CD
 CD::CD(std::string auteur ,std::string titre, std::string maison_prod, int duree , int nb_pistes)
-    : VHS(auteur,titre, maison_prod, duree) { 
+    : VHS(auteur,titre, maison_prod, duree, annee) { 
         nbpistes = nb_pistes ;
         type_media = type ; 
     }
@@ -50,8 +50,9 @@ SURCHAGE D'OPERATEUR
 std::ostream& operator<<(std::ostream& out , VHS& s) {
     out << "Type de ressource : " << s.type_media << std::endl ; 
     out << "Titre : " << s.titre << std::endl ; 
-    out << "Auteur : " << s.auteur << std::endl ; 
+    out << "Réalisateur : " << s.auteur << std::endl ; 
     out << "Maison de production : " << s.maison_prod << std::endl ; 
+    out << "Année : " << s.annee << std::endl ;
     out << "Durée : " << s.duree << " min" << std::endl ; 
     out << "Etiquette : " << s.ID << std::endl ;  
     out << "------------------" << std::endl;
@@ -65,7 +66,7 @@ std::ostream& operator<<(std::ostream& out , DVD& s) {
     out << "Auteur : " << s.auteur << std::endl ; 
     out << "Maison de production : " << s.maison_prod << std::endl ; 
     out << "Durée : " << s.duree << " min" <<std::endl ; 
-    out << "Nombre de pistes : " << s.nbpistes << std::endl;
+    out << "Année : " << s.annee << std::endl;
     out << "Etiquette : " << s.ID << std::endl ;  
     out << "------------------" << std::endl;
 

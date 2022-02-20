@@ -6,21 +6,22 @@
 
 class VHS : public Media{
     public : 
-        VHS(std::string auteur ,std::string titre, std::string maison_prod, int duree ) ;
+        VHS(std::string auteur ,std::string titre, std::string maison_prod, int duree, int annee ) ;
         friend std::ostream& operator<<(std::ostream& , VHS&);
 
         std::string maison_prod;
         std::string type = "VHS"; 
-        int duree ;       
+        int duree ;  
+        int annee;     
 } ;
 
 class DVD : public VHS{
     public :
-        DVD (std::string auteur ,std::string titre, std::string maison_prod, int duree, int nb_pistes ) ;
+        DVD (std::string auteur ,std::string titre, std::string maison_prod, int duree, int annee ) ;
         friend std::ostream& operator<<(std::ostream& , DVD&);
         
         std::string type = "DVD"; 
-        int nbpistes ;
+        int annee ;
 } ;
 
 class CD : public VHS {

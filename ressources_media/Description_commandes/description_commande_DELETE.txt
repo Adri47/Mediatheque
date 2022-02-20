@@ -1,3 +1,4 @@
+------------------------------------------------------------------------------
 OPTION commande DELETE :
 --> Spécifier l'identifiant de la ressource à supprimer :
 		- Type

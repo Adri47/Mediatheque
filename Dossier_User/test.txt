@@ -1,0 +1,9 @@
+Type de ressource : Livre
+Titre : The Lord of the ring
+Auteur : J.R.R.Tolkien
+Collection : Marvel
+Année de parution : 1940
+Nombre de pages : 452
+Etiquette : L-TH-J.R
+------------------
+

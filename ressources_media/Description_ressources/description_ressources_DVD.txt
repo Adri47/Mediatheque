@@ -1,8 +1,7 @@
+------------------------------------------------------------------------------
 Type de ressource DVD :
---> Spécifier les caractéristiques du DVD :
-	1) Réalisateur
-	2) Titre
-	3) Maison de production
-	4) Duree
-	5) Nombre de piste
-Exemple : $ 
+--> Spécifier les caractéristiques du DVD en suivant la topologie suivante :
+
+	$ Réalisateur;Titre;Maison de production;Duree;Annee
+
+	Exemple : $ Christopher Nolan;Interstellar;Warner Bros;169;2014

@@ -1,3 +1,4 @@
+------------------------------------------------------------------------------
 OPTION commande SEARCH :
 --> Spécifier la chaine de caractère à rechercher :
 	Exmple :  
