@@ -2,23 +2,32 @@
 #include <string>
 #include "classes.h"
 
+
+/*
+--------------------------------------------------------
+    METHODES MEDIA
+--------------------------------------------------------
+*/
+
 Media::Media(std::string a, std::string t) {
     auteur = a ;
     titre = t ;
 }
 
-Mediatheque::Mediatheque() { }
 
 void Mediatheque::generation_ID(Media *m){
     /*
         ID : 
-        - première lettre du type de média (ex : L pouur Livre)
+        - première lettre du type de média (ex : L pour Livre)
         - deux première lettre du titre (ex : HA pour Harry Potter)
-        - trois première lettre du nom de l'auteur ( ROW pour JK Rowling)
+        - trois première lettre du nom de l'auteur (ex : ROW pour JK Rowling)
+        - nombre de ressources du même type dans la médiathèque 
 
         - Pour un livre du nom d'Harry Potter écrit par JK Rowling -> L-HA-ROW
     */
     int space = m->auteur.find(" ",0,1) ;
+    int nb_ressource = 1 ;
+
     m->ID = m->type_media[0] ;
     m->ID += '-' ;
     m->ID += m->titre[0] ;
@@ -26,15 +35,126 @@ void Mediatheque::generation_ID(Media *m){
     m->ID += '-' ; 
     m->ID += m->auteur[space+1] ;
     m->ID += std::toupper(m->auteur[space+2]);
-    m->ID += std::toupper(m->auteur[space+3]); 
+    //m->ID += std::toupper(m->auteur[space+3]); 
+    m->ID += '-' ;
+    m->ID += std::to_string(nb_ressource); 
 
-    //std::cout << m->ID << std::endl; 
+    for(int i = 0 ; i < database.size() ; ++i) {
+        if(database[i]->ID == m->ID){
+            ++nb_ressource ;
+            m->ID[m->ID.length()-1] = nb_ressource + '0'; // Convertit un int en char 
+        }     
+    }   
 }
 
+int Media::search(std::string str) { 
+    int search_autor = auteur.find(str) ;
+    int search_title = titre.find(str) ;
+    if (search_autor != std::string::npos || search_title != std::string::npos)
+        return True ; 
+    return False ;
+}
+
+void Media::print_infos(std::ostream& where) const  {
+
+    where << "Type de ressource : " << type_media << std::endl ; 
+    where << "Auteur : " << auteur << std::endl ; 
+    where << "Titre : " << titre << std::endl ;
+
+}
+Media::~Media(){}
+/*
+--------------------------------------------------------
+    METHODES MEDIATHEQUE
+--------------------------------------------------------
+*/
+
 void Mediatheque::ajouter_media(Media *m) {
-   
+
     generation_ID(m) ; 
+    if(database == result_search)
+        result_search.push_back(m) ;
+   
     database.push_back(m);
+
+}
+
+
+void Mediatheque::recherche(std::string str){
+    std::cout << ">> Recherche lancée : " << str << std::endl; 
+    std::vector<Media *> tempo ; 
+    int result ; 
+    
+    int nb_ressources = 0 ;
+
+    for(int i = 0; i < result_search.size(); ++i) { 
+        result = result_search[i]->search(str); 
+
+        if (result == True){
+            nb_ressources++ ;
+            tempo.push_back(result_search[i]) ;
+        }
+    }
+    if (nb_ressources == 0)
+        std::cout << "\033[1;31m>> Aucune correspondance avec la chaîne recherchée : " << str << "\033[0m" << std::endl;
+    else {
+        std::cout << "\033[1;32m>> Nombre de ressource(s) trouvée(s) : " << nb_ressources << "\033[0m" << std::endl ;
+
+        result_search.clear() ;
+        result_search = tempo ; 
+    }
+
+    std::cout << "\033[1;32m>>----------------\nFin de recherche\n\033[0m" ;
+}
+
+Mediatheque::Mediatheque() { }
+
+void Mediatheque::clear(){
+    result_search.clear() ;
+    result_search = database ; 
+    std::cout << "\033[1;32m>> Buffer recherche vidé\n\033[0m" ;
+}
+
+void Mediatheque::show_IT(std::string str){
+    int find = False ; 
+    for(int i = 0 ; i < database.size(); ++i){
+        if (database[i]->ID == str){
+           std::cout << *database[i] ;  
+           find = True ; 
+           break ; 
+        }
+    }
+    if (find == False)
+        std::cout << "\033[1;31m>>> ID non trouvé !\n\033[0m" ;
+}
+
+// Affiche le contenu de la médiathèque
+void Mediatheque::list(Mediatheque m)  {
+    std::cout << "\033[1;32m>> Voici la liste des ressources de la médiathèque : \033[0m" << std::endl;
+    std::cout << m ; 
+}
+
+// Supprime le contenu dans la médiathèque et dans le buffer de recherche
+void Mediatheque::reset(){
+    std::cout << ">> Donnée(s) en cours de suppresion\n" ;
+    
+    for(int i = 0 ; i < database.size(); ++ i){
+        delete database[i];
+    }
+    
+    database.clear() ;
+    result_search.clear() ;
+    std::cout << ">> Donnée(s) effacée(s)\n";
+}
+
+void Mediatheque::delete_IT(std::string str){
+    std::cout << database.size() << std::endl ;
+    for(int i = 0 ; i < database.size(); ++i) {
+        if(database[i]->ID == str)
+            delete database[i] ;
+            //database.erase(i) ;
+    }
+    std::cout << database.size() << std::endl ; 
 }
 
 /*
@@ -43,44 +163,17 @@ SURCHAGE D'OPERATEUR
 --------------------------------------------------------
 */
 std::ostream& operator<<(std::ostream& out , Media& m) {
-    out << "Type de ressource : " << m.type_media << std::endl ; 
-    out << "Auteur : " << m.auteur << std::endl ; 
-    out << "Titre : " << m.titre << std::endl ; 
-
-    return out ;
+    m.print_infos(out) ;
+    out << "Etiquette : " << m.ID << std::endl ; 
+    out << "------------------" << std::endl;
+    return out ; 
 }
 
 
 std::ostream& operator<<(std::ostream& out , Mediatheque& M) {
 
-    for (int i = 0; i < M.database.size(); i++) {
-        Media *m = M.database[i];
-        if(m->type_media == "VHS") {
-            VHS *t =  dynamic_cast<VHS*>(m);
-            out << *t ;
-
-        }
-        else if (m->type_media == "DVD")
-        {
-            DVD *t =  dynamic_cast<DVD*>(m);
-            out << *t ;
-        }
-        else if (m->type_media == "Livre")
-        {
-            Livre *t =  dynamic_cast<Livre*>(m);
-            out << *t ;
-        }
-        else if (m->type_media == "CD")
-        {
-            CD *t =  dynamic_cast<CD*>(m);
-            out << *t ;
-        }
-        else if (m->type_media == "Revue")
-        {
-            Revue *t =  dynamic_cast<Revue*>(m);
-            out << *t ;
-        } 
-    }
-    
+   for (int i = 0 ; i < M.result_search.size() ; ++ i) {
+       out << *M.result_search[i] ;
+   }
     return out ;
 }

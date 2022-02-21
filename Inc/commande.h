@@ -6,7 +6,7 @@
 
 #define MAX_INFO_LIVRE  5
 #define MAX_INFO_DVD    5
-#define MAX_INFO_VHS    5
+#define MAX_INFO_VHS    4
 #define MAX_INFO_CD     5
 #define MAX_INFO_REVUE  7
 
@@ -21,7 +21,12 @@ void selection_commande(string *commande);
 void selection_option(string *commande, string *option, Mediatheque* database);
 int commande_ADD(string *type, Mediatheque* database);
 int commande_SAVE(string nom_fichier, Mediatheque *media);
-int commande_CLEAR();
+int commande_SEARCH(string recherche, Mediatheque *M);
+int commande_SHOW(string ressource, Mediatheque *M);
+int commande_DELETE(string ressource, Mediatheque *M);
+int commande_CLEAR(Mediatheque *M);
+int commande_RESET(Mediatheque *M);
+int commande_LIST(Mediatheque *M);
 int recup_donnee_ressource (string donnee, string *donnee_ressources, int nombre_ressources);
 int verif_buffer_string(string *buffer, int nb_element);
 

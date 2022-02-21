@@ -121,20 +121,36 @@ void selection_option(string *commande, string *option, Mediatheque* database)
         lecture_fichier("../ressources_media/Description_commandes/description_commande_SEARCH.txt");
         cout << ">> ";
         cin >> *option;
+        commande_SEARCH (*option, &M);
     }
     else if (*commande == "SHOW")
     {
         lecture_fichier("../ressources_media/Description_commandes/description_commande_SHOW.txt");
         cout << ">> ";
         cin >> *option;
+        commande_SHOW(*option, &M);
+
     }
     else if (*commande == "DELETE")
     {
         lecture_fichier("../ressources_media/Description_commandes/description_commande_DELETE.txt");
         cout << ">> ";
         cin >> *option;
+        commande_DELETE(*option, &M);
     }
-    else if ( *commande == ("BYE") || *commande == ("CLEAR") || *commande == ("LIST") || *commande == ("RESET"))
+    else if (*commande == "CLEAR")
+    {
+        commande_CLEAR(&M);
+    }
+    else if (*commande == "RESET")
+    {
+        commande_RESET(&M);
+    }
+    else if (*commande == "LIST")
+    {
+        commande_LIST(&M);
+    }
+    else if ( *commande == "BYE")
     {
     }
     else
@@ -158,6 +174,11 @@ int commande_ADD(string *type, Mediatheque* database)
             try{
                 Livre *new_livre = new Livre(donnee_livre[0], donnee_livre[1], donnee_livre[2], stoi(donnee_livre[3]), stoi(donnee_livre[4])) ;
                 database->ajouter_media(new_livre);
+                /*ofstream file1;
+                file1.open("../Dossier_User/Mediatheque.txt");
+                cout << "Size of Media = " << sizeof(new_livre) <<endl;
+                cout << new_livre << endl;
+                file1.write((char*)new_livre,sizeof(new_livre));*/
                 return EXIT_SUCCESS;
             }
             catch(invalid_argument){
@@ -204,7 +225,7 @@ int commande_ADD(string *type, Mediatheque* database)
         if ( recup_donnee_ressource(donnee, donnee_vhs, MAX_INFO_VHS) == 0)
         {
             try{
-                VHS *new_vhs = new VHS(donnee_vhs[0], donnee_vhs[1], donnee_vhs[2], stoi(donnee_vhs[3]), stoi(donnee_vhs[4])) ;
+                VHS *new_vhs = new VHS(donnee_vhs[0], donnee_vhs[1], donnee_vhs[2], stoi(donnee_vhs[3])) ;
                 database->ajouter_media(new_vhs);
                 return EXIT_SUCCESS;
             }
@@ -313,10 +334,41 @@ int commande_SAVE(string nom_fichier, Mediatheque *media)
         return EXIT_FAILURE;
 }
 
-int commande_CLEAR()
+int commande_SEARCH (string recherche, Mediatheque *M)
 {
+    M->recherche(recherche);
     return EXIT_SUCCESS;
 }
+
+int commande_SHOW(string ressource, Mediatheque *M)
+{
+    M->show_IT(ressource);
+    return EXIT_SUCCESS;
+}
+
+int commande_DELETE(string ressource, Mediatheque *M)
+{
+    M->delete_IT(ressource);
+    return EXIT_SUCCESS;
+}
+int commande_CLEAR(Mediatheque *M)
+{
+    M->clear();
+    return EXIT_SUCCESS;
+}
+
+int commande_RESET(Mediatheque *M)
+{
+    M->reset();
+    return EXIT_SUCCESS;
+}
+
+int commande_LIST(Mediatheque *M)
+{
+    M->list(*M);
+    return EXIT_SUCCESS;
+}
+
 int verif_buffer_string(string *buffer, int nb_element)
 {
     int taille = sizeof(buffer) - nb_element + 1;

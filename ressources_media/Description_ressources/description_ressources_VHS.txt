@@ -2,6 +2,6 @@
 Type de ressource VHS :
 --> Spécifier les caractéristiques du VHS en suivant la topologie suivante :
 
-	$ Auteur;Titre;Maison de production;Duree;Annee
+	$ Auteur;Titre;Maison de production;Duree
 
-	Exemple : $ Roderick Thorp;Piège De Cristal;20th Century;132;1988
+	Exemple : $ Roderick Thorp;Piège De Cristal;20th Century;132
