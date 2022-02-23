@@ -4,4 +4,4 @@ Type de ressource Revue :
 
 	$ Rédacteur en chef;Titre;Maison de production;Edition;Nombre d'article;Année;Nombre de pages
 
-	Exemple : $ Jerome Blanchart;Sciences Et Vie;GM-Editions;12;2022;50
+	Exemple : $ Jerome Blanchart;Sciences Et Vie;Reworld Media;GM-Editions;12;2022;50

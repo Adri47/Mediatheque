@@ -28,8 +28,8 @@ class Mediatheque{
         void ajouter_media(Media *m) ;
         void generation_ID(Media *m) ;
         void recherche(std::string str) ;
-        void show_IT(std::string str) ;
-        void delete_IT(std::string str) ;
+        void show_ID(std::string str) ;
+        void delete_ID(std::string str) ;
         void list(Mediatheque m) ;
         void reset();
         void clear() ;

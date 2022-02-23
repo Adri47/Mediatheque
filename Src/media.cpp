@@ -115,7 +115,7 @@ void Mediatheque::clear(){
     std::cout << "\033[1;32m>> Buffer recherche vidé\n\033[0m" ;
 }
 
-void Mediatheque::show_IT(std::string str){
+void Mediatheque::show_ID(std::string str){
     int find = False ; 
     for(int i = 0 ; i < database.size(); ++i){
         if (database[i]->ID == str){
@@ -136,7 +136,7 @@ void Mediatheque::list(Mediatheque m)  {
 
 // Supprime le contenu dans la médiathèque et dans le buffer de recherche
 void Mediatheque::reset(){
-    std::cout << ">> Donnée(s) en cours de suppresion\n" ;
+    std::cout << "\033[1;32m>> Donnée(s) en cours de suppresion\n\033[0m" ;
     
     for(int i = 0 ; i < database.size(); ++ i){
         delete database[i];
@@ -144,17 +144,34 @@ void Mediatheque::reset(){
     
     database.clear() ;
     result_search.clear() ;
-    std::cout << ">> Donnée(s) effacée(s)\n";
+    std::cout << "\033[1;32m>> Donnée(s) effacée(s)\n\033[0m";
 }
 
-void Mediatheque::delete_IT(std::string str){
-    std::cout << database.size() << std::endl ;
-    for(int i = 0 ; i < database.size(); ++i) {
-        if(database[i]->ID == str)
-            delete database[i] ;
-            //database.erase(i) ;
+void Mediatheque::delete_ID(std::string str){
+    
+    std::vector<Media *> tempo = database ; 
+    int wrong_ID = 1;
+    database.clear() ;
+    result_search.clear() ;
+    for(int i = 0 ; i < tempo.size(); ++i) {
+        if(tempo[i]->ID == str)
+        {
+            delete tempo[i] ;
+            wrong_ID = 0;
+            std::cout << "\033[1;32m>> Ressource supprimée !\n\033[0m" ;
+        }
+
+        else {
+            database.push_back(tempo[i]) ; 
+            result_search.push_back(tempo[i]) ;
+        }
     }
-    std::cout << database.size() << std::endl ; 
+    if (wrong_ID == 1)
+    {
+        std::cout << "\033[1;31m>> Mauvais ID !\n\033[0m" ;
+        wrong_ID = 1;
+    }
+    
 }
 
 /*

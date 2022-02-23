@@ -10,7 +10,6 @@ extern Mediatheque M;
 
 void  lecture_clavier(string chaine_ecran, string *donnee_clavier)
 {
-    //cout << chaine_ecran << endl;
     cout << ">> ";
     //cin.ignore(255, '\n');  //vide l'ancien buffer cin jusqu'à trouver le '\n' dans une limite de 255 carac
     getline(cin, *donnee_clavier);
@@ -105,6 +104,8 @@ void selection_option(string *commande, string *option, Mediatheque* database)
         lecture_fichier("../ressources_media/Description_commandes/description_commande_LOAD.txt");
         cout << ">> ";
         cin >> *option;
+        commande_LOAD( *option, &M);
+
     }
     else if (*commande == "SAVE")
     {
@@ -174,11 +175,6 @@ int commande_ADD(string *type, Mediatheque* database)
             try{
                 Livre *new_livre = new Livre(donnee_livre[0], donnee_livre[1], donnee_livre[2], stoi(donnee_livre[3]), stoi(donnee_livre[4])) ;
                 database->ajouter_media(new_livre);
-                /*ofstream file1;
-                file1.open("../Dossier_User/Mediatheque.txt");
-                cout << "Size of Media = " << sizeof(new_livre) <<endl;
-                cout << new_livre << endl;
-                file1.write((char*)new_livre,sizeof(new_livre));*/
                 return EXIT_SUCCESS;
             }
             catch(invalid_argument){
@@ -296,7 +292,7 @@ int recup_donnee_ressource (string donnee, string *donnee_ressources, int nombre
     int j = 0;
     char c = 0;
     for (int i = 0 ; i <= donnee.size(); i++)
-    {
+    {        
         if (j > nombre_ressources - 1) 
         {
             //gestion surplus de donnees
@@ -305,6 +301,7 @@ int recup_donnee_ressource (string donnee, string *donnee_ressources, int nombre
         }
         c = donnee[i];
         if (c ==';') j++; 
+        
         if (c !=';') donnee_ressources[j] = donnee_ressources[j] + donnee[i];
     }
     //si le nombre de ressources est trop faible
@@ -342,13 +339,13 @@ int commande_SEARCH (string recherche, Mediatheque *M)
 
 int commande_SHOW(string ressource, Mediatheque *M)
 {
-    M->show_IT(ressource);
+    M->show_ID(ressource);
     return EXIT_SUCCESS;
 }
 
 int commande_DELETE(string ressource, Mediatheque *M)
 {
-    M->delete_IT(ressource);
+    M->delete_ID(ressource);
     return EXIT_SUCCESS;
 }
 int commande_CLEAR(Mediatheque *M)
@@ -369,14 +366,150 @@ int commande_LIST(Mediatheque *M)
     return EXIT_SUCCESS;
 }
 
-int verif_buffer_string(string *buffer, int nb_element)
+int commande_LOAD(string nom_fichier_txt, Mediatheque *M)
 {
-    int taille = sizeof(buffer) - nb_element + 1;
-    cout << "taille : " << taille << endl;
 
-    if ( sizeof(buffer) != taille  )
+    int position = 0;
+    int taille = 0;
+
+    string ligne;
+    string ressource;
+    string donnee;
+    
+    //on associe le fichier au dossier user
+    nom_fichier_txt = "../Dossier_User/" + nom_fichier_txt;
+    //si aucune correspondance avec un fichier
+    ifstream infile(nom_fichier_txt, ios::in);
+    if (!infile)
     {
+        cout << "\033[1;31mVous avez rentré un mauvais nom de fichier ou celui-ci n'est pas placé dans le dossier DOSSIER_USER/ \033[0m" << endl;
         return EXIT_FAILURE;
+    } 
+    //En suivant le CDC, on doit faire un reset de la mediatheque
+    M->reset();
+
+
+   //if (infile.open(nom_fichier_txt)==1);
+    int i = 0;
+    
+    //on arrete quand on arrive a la fin du fichier
+    while(!infile.eof())
+    {
+        //prelevement ligne par ligne
+        getline(infile, ligne);
+        taille = ligne.size();
+        int position = ligne.find(";");
+        //on releve en premier la ressource associee
+        ressource = ligne.substr(0,position);
+        //on recupere les donnee a traiter
+        donnee = ligne.substr(position + 1, taille-(position +1));
+
+        if (ressource == "Livre")
+        {
+            string donnee_livre[MAX_INFO_LIVRE] = {};
+            if ( recup_donnee_ressource(donnee, donnee_livre, MAX_INFO_LIVRE) == 0)
+            {
+                try{
+                    Livre *new_livre = new Livre(donnee_livre[0], donnee_livre[1], donnee_livre[2], stoi(donnee_livre[3]), stoi(donnee_livre[4])) ;
+                    M->ajouter_media(new_livre);
+                }
+                catch(invalid_argument){
+                    cout << "\033[1;31mVous avez rentré des lettres au lieux de chiffre pour la ressource : " << donnee << "\033[0m" << endl;
+                    return EXIT_FAILURE;
+                }
+            }
+            else
+            {
+                return EXIT_FAILURE;
+            }
+        }
+
+        else if (ressource == "DVD")
+        {
+            string donnee_dvd[MAX_INFO_DVD] = {};
+            if ( recup_donnee_ressource(donnee, donnee_dvd, MAX_INFO_DVD) == 0)
+            {
+                try{
+                    DVD *new_dvd = new DVD(donnee_dvd[0], donnee_dvd[1], donnee_dvd[2], stoi(donnee_dvd[3]), stoi(donnee_dvd[4])) ;
+                    M->ajouter_media(new_dvd);
+                }
+                catch(invalid_argument){
+                    cout << "\033[1;31mVous avez rentré des lettres au lieux de chiffre pour la ressource : " << donnee << "\033[0m" << endl;
+                    return EXIT_FAILURE;
+                }
+            }
+            else
+            {
+                return EXIT_FAILURE;
+            }
+        
+        }
+        else if (ressource == "VHS")
+        {
+            string donnee_vhs[MAX_INFO_VHS] = {};
+
+            if ( recup_donnee_ressource(donnee, donnee_vhs, MAX_INFO_VHS) == 0)
+            {
+                try{
+                    VHS *new_vhs = new VHS(donnee_vhs[0], donnee_vhs[1], donnee_vhs[2], stoi(donnee_vhs[3])) ;
+                    M->ajouter_media(new_vhs);
+                }
+                catch(invalid_argument){
+                    cout << "\033[1;31mVous avez rentré des lettres au lieux de chiffre pour la ressource : " << donnee << "\033[0m" << endl;
+                    return EXIT_FAILURE;
+                }
+            }
+            else
+            {
+                return EXIT_FAILURE;
+            }
+        }
+        else if (ressource == "CD")
+        {
+            string donnee_cd[MAX_INFO_CD] = {};
+
+            if ( recup_donnee_ressource(donnee, donnee_cd, MAX_INFO_CD) == 0)
+            {
+                try{
+                    CD *new_cd = new CD(donnee_cd[0], donnee_cd[1], donnee_cd[2], stoi(donnee_cd[3]), stoi(donnee_cd[4])) ;
+                    M->ajouter_media(new_cd);
+                }
+                catch(invalid_argument){
+                    cout << "\033[1;31mVous avez rentré des lettres au lieux de chiffre pour la ressource !! : " << donnee << "\033[0m" << endl;
+                    return EXIT_FAILURE;
+                }
+            }
+            else
+            {
+                return EXIT_FAILURE;
+            }
+        }
+        else if(ressource == "Revue")
+        {
+            string donnee_revue[MAX_INFO_REVUE] = {};
+
+            if ( recup_donnee_ressource(donnee, donnee_revue, MAX_INFO_REVUE) == 0)
+            {
+                try{
+                    Revue *new_cd = new Revue(donnee_revue[0], donnee_revue[1], donnee_revue[2], donnee_revue[3], stoi(donnee_revue[4]), stoi(donnee_revue[5]), stoi(donnee_revue[6]));
+                    M->ajouter_media(new_cd);   
+                }
+                catch(invalid_argument){
+                    cout << "\033[1;31mVous avez rentré des lettres au lieux de chiffre pour la ressource !! : " << donnee << "\033[0m" << endl;
+                    return EXIT_FAILURE;
+                }
+            } 
+            else
+            {
+                return EXIT_FAILURE;
+            }    
+        }
+        else{
+            cout << "\033[1;31mVous avez entré une mauvaise option !\033[0m" << endl;
+        }
     }
-    else return EXIT_SUCCESS;
+
+    infile.close();
+    cout << "\033[0m";
+    return EXIT_SUCCESS;
 }

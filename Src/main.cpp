@@ -18,16 +18,11 @@ int main ()
 
     lecture_fichier("../ressources_media/Description_commandes/Bienvenue.txt");
 
-    Livre SA("J.R.R.Tolkien","The Lord of the ring","Marvel",1940,452);
-    M.ajouter_media(&SA);
-
     while (commande != "BYE")
     {
         selection_commande(&commande);
         selection_option(&commande, &option, &M);      
     }
-
-    //cout << M << endl;
     
     cout << "\033[1;34mVous avez quitté la médiathèque ! Au revoir !\033[0m" << endl;
     cin.clear(); //remet l'état du flux dans un état valide (resolution pb de terminal)

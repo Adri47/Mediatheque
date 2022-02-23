@@ -1,10 +1,10 @@
 ------------------------------------------------------------------------------
 ADD    : Ajouter d'une ressource
-LOAD   : Charger votre fichier pour remplacer les données actuelles
+LOAD   : Charger un fichier texte contenant les ressources. Le contenu de la mediathèque sera entièrement remplacé
 SAVE   : Sauvegarder le contenu des resssources dans un fichier texte
 SEARCH : Rechercher une ressource
-CLEAR  : Réinitialiser les ressources
+CLEAR  : Réinitialiser la recherche
 LIST   : Afficher les ressources de manière compacte
-SHOW   : Afficher les information d'une ressource
+SHOW   : Afficher les informations d'une ressource
 DELETE : Supprimer une resssource
 RESET  : Supprimer toutes les ressources

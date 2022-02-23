@@ -1,3 +1,13 @@
 ------------------------------------------------------------------------------
 OPTION commande LOAD :
---> Spécifier le chemin du fichier à charger : exemple "Nouvelle_List.txt"
+--> Spécifiez le chemin du fichier à charger : exemple "Nouvelle_List.txt" . Placez-le dans le dossier Dossier_User/
+--> Dans votre fichier, il faut respecter la syntaxe suivante :
+        nom_ressource;info1;info2;...;infoN
+
+    Exemple :
+    
+        Livre;jk;hp;blom;1998;223
+        DVD;Christopher Nolan;Interstellar;Warner Bros;169;2014
+        VHS;Roderick Thorp;Piège De Cristal;20th Century;132
+        CD;Michael Jackson;Thriller;Sony;42;1982
+        Revue;Jerome Blanchart;Sciences Et Vie;Reworld Media;GM-Editions;12;2000;50
